@@ -7,12 +7,7 @@ trigger:
 
 resources:
 - repo: self
-- task: Docker@2
-  inputs:
-    containerRegistry: 'cicd-container-svc'
-    repository: 'weather-api'
-    command: 'buildAndPush'
-    Dockerfile: '**/Dockerfile'
+
 variables:
   # Container registry service connection established during pipeline creation
   dockerRegistryServiceConnection: 'f45cfb62-2687-42c5-9fdb-5cda46a94975'
@@ -41,4 +36,6 @@ stages:
         dockerfile: $(dockerfilePath)
         containerRegistry: $(dockerRegistryServiceConnection)
         tags: |
-          $(tag)
+         latest
+         ${Build.BuildId}
+
