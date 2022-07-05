@@ -10,11 +10,11 @@ resources:
 
 variables:
   # Container registry service connection established during pipeline creation
-  dockerRegistryServiceConnection: 'f45cfb62-2687-42c5-9fdb-5cda46a94975'
-  imageRepository: 'weatherwebapi'
-  containerRegistry: 'cicdcontainer01.azurecr.io'
-  dockerfilePath: '$(Build.SourcesDirectory)/Dockerfile'
-  tag: '$(Build.BuildId)'
+  # dockerRegistryServiceConnection: 'f45cfb62-2687-42c5-9fdb-5cda46a94975'
+  # imageRepository: 'weatherwebapi'
+  # containerRegistry: 'cicdcontainer01.azurecr.io'
+  # dockerfilePath: '$(Build.SourcesDirectory)/Dockerfile'
+  # tag: '$(Build.BuildId)'
 
   # Agent VM image name
   vmImageName: 'ubuntu-latest'
@@ -31,11 +31,12 @@ stages:
     - task: Docker@2
       displayName: Build and push an image to container registry
       inputs:
-        command: buildAndPush
-        repository: $(imageRepository)
-        dockerfile: $(dockerfilePath)
-        containerRegistry: $(dockerRegistryServiceConnection)
+        containerRegistry: 'dockerhub-svc'
+        repository: 'ajinkya1311/weather-api'
+        command: 'buildAndPush'
+        Dockerfile: '**/Dockerfile'
         tags: |
-         latest
-         ${Build.BuildId}
+          latest
+          ${Build.BuildId}
+
 
