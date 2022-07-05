@@ -7,12 +7,17 @@ trigger:
 
 resources:
 - repo: self
-
+- task: Docker@2
+  inputs:
+    containerRegistry: 'cicd-container-svc'
+    repository: 'weather-api'
+    command: 'buildAndPush'
+    Dockerfile: '**/Dockerfile'
 variables:
   # Container registry service connection established during pipeline creation
   dockerRegistryServiceConnection: 'f45cfb62-2687-42c5-9fdb-5cda46a94975'
   imageRepository: 'weatherwebapi'
-  containerRegistry: 'azurereg01.azurecr.io'
+  containerRegistry: 'cicdcontainer01.azurecr.io'
   dockerfilePath: '$(Build.SourcesDirectory)/Dockerfile'
   tag: '$(Build.BuildId)'
 
