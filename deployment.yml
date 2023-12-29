@@ -16,6 +16,6 @@ spec:
     spec:
       containers:
       - name: dotnet-api
-        image: ajinkya1311/dotnet-api:1.0.0
+        image: ajinkya1311/dotnet-api:2.0.0
         ports:
         - containerPort: 8080
