@@ -2,6 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: dotnet-api-deployment
+  namespace: dev-dotnet-api
   labels:
     app: dotnet-api
 spec:
@@ -16,6 +17,26 @@ spec:
     spec:
       containers:
       - name: dotnet-api
-        image: ajinkya1311/dotnet-api:2.0.0
+        image: ajinkya1311/dotnet-api:3.0.0
+        imagePullPolicy: Always
         ports:
         - containerPort: 8080
+        env:
+          - name: MyConfigKey
+            valueFrom:
+              configMapKeyRef:
+                key: MyConfigKey
+                name: config-map
+          - name: MyDBPass
+            valueFrom:
+              secretKeyRef:
+                key: MyDBPass
+                name: secret-map
+
+        resources:
+          requests:
+            memory: "64Mi"
+            cpu: "250m"
+          limits:
+            memory: "128Mi"
+            cpu: "500m"

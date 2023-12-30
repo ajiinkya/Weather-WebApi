@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: config-map
+  namespace: dev-dotnet-api
+data:
+  MyConfigKey:  "My value DEV value of MyConfigKey present in yml code"

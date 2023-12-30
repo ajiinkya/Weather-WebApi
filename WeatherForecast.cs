@@ -11,4 +11,5 @@ public class WeatherForecast
     public string? Summary { get; set; }
 
     public string? ConfigValue { get; set; }
+    public string? DBPass { get; set; }
 }
